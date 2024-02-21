@@ -15,7 +15,6 @@ const (
 )
 
 func main() {
-
 	if len(os.Args) != 3 {
 		logrus.Errorf("Usage: %s <search engine> <JSON parameters>", os.Args[0])
 		os.Exit(1)
