@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/gptscript-ai/search/pkg/bing"
 	"github.com/gptscript-ai/search/pkg/brave"
 	"github.com/sirupsen/logrus"
 )
@@ -25,6 +26,8 @@ func main() {
 		err    error
 	)
 	switch os.Args[1] {
+	case EngineBing:
+		result, err = bing.SearchBing(os.Args[2])
 	case EngineBrave:
 		result, err = brave.SearchBrave(os.Args[2])
 	default:

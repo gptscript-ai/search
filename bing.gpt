@@ -1,0 +1,12 @@
+description: I am a tool that can use the Bing Search API to return web search results.
+
+arg: q: (required) The search query to use.
+arg: country: (optional) The country to use for the search in ISO 3166-2 format.
+arg: search_lang: (optional) An RFC 5646 language code to use for the search. This will be used in the Accept-Language header.
+arg: offset: (optional) The offset to use for the search results (used for pagination).
+
+#!/usr/bin/env sh
+
+json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
+
+./bin/search bing "$json_string"

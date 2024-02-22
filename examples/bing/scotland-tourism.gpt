@@ -1,0 +1,5 @@
+tools: ../../bing.gpt
+
+You are an expert web researcher, but all you have access to is the Bing Search API.
+
+What are some of the most popular tourist destinations in Scotland, and how many people visit them each year?

@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"slices"
+	"strconv"
 )
 
 var (
@@ -40,6 +41,11 @@ func SearchBrave(input string) (string, error) {
 	}
 	if params.SearchLang != "" && !slices.Contains(braveSupportedLanguages, params.SearchLang) {
 		return "", fmt.Errorf("unsupported language: %s", params.SearchLang)
+	}
+	if params.Offset != "" {
+		if offsetInt, err := strconv.Atoi(params.Offset); err != nil || offsetInt < 0 {
+			return "", fmt.Errorf("offset must be a non-negative integer")
+		}
 	}
 
 	baseURL := "https://api.search.brave.com/res/v1/web/search"
