@@ -1,6 +1,6 @@
 # Search Tools for GPTScript (WIP)
 
-This repo contains (or will contain) search tools for GPTScript. The plan is to support Bing, Brave, and Google.
+This repo contains search tools for GPTScript. The plan is to support Bing, Brave, and Google.
 
 Usage example:
 
