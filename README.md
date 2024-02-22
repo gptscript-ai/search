@@ -10,12 +10,12 @@ Usage example:
 
 For usage examples with GPTScript, see the `examples` directory.
 
+> **You are responsible for ensuring that your use of these search APIs with GPTScript does not violate the terms of service of the respective search engines.**
+
 ## Bing
 
 For Bing, this tool uses the official [Bing Web Search API](https://www.microsoft.com/en-us/bing/apis/bing-web-search-api)
 The environment variable `GPTSCRIPT_BING_SEARCH_TOKEN` must be set to your API key in order for it to work.
-
-> **Be sure that you do not violate the terms of service of the Bing Web Search API!**
 
 ### JSON Parameters
 
@@ -30,8 +30,6 @@ The environment variable `GPTSCRIPT_BING_SEARCH_TOKEN` must be set to your API k
 For Brave, this tool uses the official [Brave Search API](https://brave.com/search/api/).
 The environment variable `GPTSCRIPT_BRAVE_SEARCH_TOKEN` must be set to your API key in order for it to work.
 
-> **Be sure that your plan allows you to use the Brave Search API for AI inference!** 
-
 ### JSON Parameters
 
 - `q` (required): The search query.
@@ -43,3 +41,13 @@ The environment variable `GPTSCRIPT_BRAVE_SEARCH_TOKEN` must be set to your API 
     - Portuguese must be either `pt-br` (Brazil) or `pt-pt` (Portugal).
 - `offset` (optional): The offset of the first result to return (used for pagination).
   Each query will return up to 20 results.
+
+## Google
+
+For Google, this tool uses the official [Google Custom Search JSON API](https://developers.google.com/custom-search/v1/overview).
+To use this API, you will need to create a [Programmable Search Engine](https://developers.google.com/custom-search/docs/tutorial/creatingcse) first.
+The environment variables `GPTSCRIPT_GOOGLE_SEARCH_ENGINE_ID` and `GPTSCRIPT_GOOGLE_SEARCH_TOKEN` must be set to your Programmable Search Engine ID and API key, respectively.
+
+### JSON Parameters
+
+- `q` (required): The search query.

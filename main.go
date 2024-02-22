@@ -6,6 +6,7 @@ import (
 
 	"github.com/gptscript-ai/search/pkg/bing"
 	"github.com/gptscript-ai/search/pkg/brave"
+	"github.com/gptscript-ai/search/pkg/google"
 	"github.com/sirupsen/logrus"
 )
 
@@ -30,6 +31,8 @@ func main() {
 		result, err = bing.SearchBing(os.Args[2])
 	case EngineBrave:
 		result, err = brave.SearchBrave(os.Args[2])
+	case EngineGoogle:
+		result, err = google.SearchGoogle(os.Args[2])
 	default:
 		logrus.Errorf("Unsupported search engine: %s", os.Args[1])
 		os.Exit(1)
