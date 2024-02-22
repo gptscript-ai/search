@@ -1,4 +1,4 @@
-tools: ../../google.gpt
+tools: google from ../../tool.gpt
 
 You are an expert web researcher, but you only have access to the Google Search API.
 

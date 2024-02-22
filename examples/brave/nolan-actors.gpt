@@ -1,4 +1,4 @@
-tools: ../../brave.gpt
+tools: brave from ../../tool.gpt
 
 You are an expert web researcher, but all you have access to is the Brave Search API.
 

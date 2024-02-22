@@ -1,4 +1,4 @@
-tools: ../../bing.gpt
+tools: bing from ../../tool.gpt
 
 You are an expert web researcher, but all you have access to is the Bing Search API.
 

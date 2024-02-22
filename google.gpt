@@ -1,9 +1,0 @@
-description: I am a tool that can use the Google Custom Search JSON API to return web search results.
-
-arg: q: (required) The search query to use.
-
-#!/usr/bin/env sh
-
-json_string="{\"q\":\"$q\"}"
-
-./bin/search google "$json_string"
