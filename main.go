@@ -12,30 +12,68 @@ import (
 )
 
 const (
+	TypeImage = "image"
+	TypeWeb   = "web"
+
 	EngineBing   = "bing"
 	EngineBrave  = "brave"
 	EngineGoogle = "google"
 )
 
 func main() {
-	if len(os.Args) != 3 {
-		logrus.Errorf("Usage: %s <search engine> <JSON parameters>", os.Args[0])
+	if len(os.Args) != 4 {
+		logrus.Errorf("Usage: %s <web | image> <search engine> <JSON parameters>", os.Args[0])
 		os.Exit(1)
 	}
 
+	searchType, engine, input := os.Args[1], os.Args[2], os.Args[3]
+
+	switch searchType {
+	case TypeImage:
+		image(engine, input)
+	case TypeWeb:
+		web(engine, input)
+	default:
+		logrus.Errorf("Unsupported search type: %s", os.Args[1])
+		os.Exit(1)
+	}
+}
+
+func web(engine, input string) {
 	var (
-		results common.SearchResults
+		results common.WebSearchResults
 		err     error
 	)
-	switch os.Args[1] {
+	switch engine {
 	case EngineBing:
-		results, err = bing.Search(os.Args[2])
+		results, err = bing.Search(input)
 	case EngineBrave:
-		results, err = brave.Search(os.Args[2])
+		results, err = brave.Search(input)
 	case EngineGoogle:
-		results, err = google.Search(os.Args[2])
+		results, err = google.Search(input)
 	default:
-		logrus.Errorf("Unsupported search engine: %s", os.Args[1])
+		logrus.Errorf("Unsupported search engine for web search: %s", engine)
+		os.Exit(1)
+	}
+
+	if err != nil {
+		logrus.Errorf(err.Error())
+		os.Exit(1)
+	}
+
+	fmt.Print(results.ToString())
+}
+
+func image(engine, input string) {
+	var (
+		results common.ImageSearchResults
+		err     error
+	)
+	switch engine {
+	case EngineBrave:
+		results, err = brave.SearchImage(input)
+	default:
+		logrus.Errorf("Unsupported search engine for image search: %s", engine)
 		os.Exit(1)
 	}
 

@@ -1,6 +1,7 @@
-package google
+package brave
 
 import (
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -13,30 +14,28 @@ import (
 	"github.com/gptscript-ai/search/pkg/common"
 )
 
-const count = "10" // 10 is the max allowed by Google
+const (
+	count        = "20" // 20 is the max allowed by Brave
+	resultFilter = "web"
+)
 
 func Search(input string) (common.WebSearchResults, error) {
-	token := os.Getenv("GPTSCRIPT_GOOGLE_SEARCH_TOKEN")
+	token := os.Getenv("GPTSCRIPT_BRAVE_SEARCH_TOKEN")
 	if token == "" {
-		return common.WebSearchResults{}, fmt.Errorf("GPTSCRIPT_GOOGLE_SEARCH_TOKEN is not set")
+		return common.WebSearchResults{}, fmt.Errorf("GPTSCRIPT_BRAVE_SEARCH_TOKEN is not set")
 	}
 
-	searchEngineID := os.Getenv("GPTSCRIPT_GOOGLE_SEARCH_ENGINE_ID")
-	if searchEngineID == "" {
-		return common.WebSearchResults{}, fmt.Errorf("GPTSCRIPT_GOOGLE_SEARCH_ENGINE_ID is not set")
-	}
-
-	var params params
+	var params webParams
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
 		return common.WebSearchResults{}, err
 	}
 
-	resultsJSON, err := getSearchResults(token, searchEngineID, params)
+	resultsJSON, err := getSearchResults(token, params)
 	if err != nil {
 		return common.WebSearchResults{}, err
 	}
 
-	var resp apiResponse
+	var resp webAPIResponse
 	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
 		return common.WebSearchResults{}, err
 	}
@@ -44,9 +43,10 @@ func Search(input string) (common.WebSearchResults, error) {
 	return resp.toSearchResults(), nil
 }
 
-func getSearchResults(token, engineID string, params params) (string, error) {
+func getSearchResults(token string, params webParams) (string, error) {
+	// Validate parameters
 	if params.Query == "" {
-		return "", fmt.Errorf("query is empty")
+		return "", fmt.Errorf("query is required")
 	}
 	if params.Country != "" && !slices.Contains(SupportedCountries, params.Country) {
 		return "", fmt.Errorf("unsupported country: %s", params.Country)
@@ -60,21 +60,20 @@ func getSearchResults(token, engineID string, params params) (string, error) {
 		}
 	}
 
-	baseURL := "https://www.googleapis.com/customsearch/v1"
+	baseURL := "https://api.search.brave.com/res/v1/web/search"
 	queryParams := url.Values{}
 	queryParams.Add("q", params.Query)
-	queryParams.Add("key", token)
-	queryParams.Add("cx", engineID)
-	queryParams.Add("num", count)
+	queryParams.Add("count", count)
+	queryParams.Add("result_filter", resultFilter)
 
 	if params.Country != "" {
-		queryParams.Add("cr", "country"+params.Country)
+		queryParams.Add("country", params.Country)
 	}
 	if params.SearchLang != "" {
-		queryParams.Add("lr", "lang_"+params.SearchLang)
+		queryParams.Add("search_lang", params.SearchLang)
 	}
 	if params.Offset != "" {
-		queryParams.Add("start", params.Offset)
+		queryParams.Add("offset", params.Offset)
 	}
 
 	fullURL := fmt.Sprintf("%s?%s", baseURL, queryParams.Encode())
@@ -83,6 +82,9 @@ func getSearchResults(token, engineID string, params params) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	req.Header.Set("Accept-Encoding", "gzip")
+	req.Header.Set("X-Subscription-Token", token)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -93,7 +95,12 @@ func getSearchResults(token, engineID string, params params) (string, error) {
 		_ = res.Body.Close()
 	}()
 
-	body, err := io.ReadAll(res.Body)
+	gzipReader, err := gzip.NewReader(res.Body)
+	if err != nil {
+		return "", err
+	}
+
+	body, err := io.ReadAll(gzipReader)
 	if err != nil {
 		return "", err
 	}

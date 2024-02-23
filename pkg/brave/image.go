@@ -9,41 +9,35 @@ import (
 	"net/url"
 	"os"
 	"slices"
-	"strconv"
 
 	"github.com/gptscript-ai/search/pkg/common"
 )
 
-const (
-	count        = "20" // 20 is the max allowed by Brave
-	resultFilter = "web"
-)
-
-func Search(input string) (common.SearchResults, error) {
+func SearchImage(input string) (common.ImageSearchResults, error) {
 	token := os.Getenv("GPTSCRIPT_BRAVE_SEARCH_TOKEN")
 	if token == "" {
-		return common.SearchResults{}, fmt.Errorf("GPTSCRIPT_BRAVE_SEARCH_TOKEN is not set")
+		return common.ImageSearchResults{}, fmt.Errorf("GPTSCRIPT_BRAVE_SEARCH_TOKEN is not set")
 	}
 
-	var params params
+	var params imageParams
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
-		return common.SearchResults{}, err
+		return common.ImageSearchResults{}, err
 	}
 
-	resultsJSON, err := getSearchResults(token, params)
+	resultsJSON, err := getImageSearchResults(token, params)
 	if err != nil {
-		return common.SearchResults{}, err
+		return common.ImageSearchResults{}, err
 	}
 
-	var resp apiResponse
+	var resp imageAPIResponse
 	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
-		return common.SearchResults{}, err
+		return common.ImageSearchResults{}, err
 	}
 
 	return resp.toSearchResults(), nil
 }
 
-func getSearchResults(token string, params params) (string, error) {
+func getImageSearchResults(token string, params imageParams) (string, error) {
 	// Validate parameters
 	if params.Query == "" {
 		return "", fmt.Errorf("query is required")
@@ -54,26 +48,16 @@ func getSearchResults(token string, params params) (string, error) {
 	if params.SearchLang != "" && !slices.Contains(SupportedLanguages, params.SearchLang) {
 		return "", fmt.Errorf("unsupported language: %s", params.SearchLang)
 	}
-	if params.Offset != "" {
-		if offsetInt, err := strconv.Atoi(params.Offset); err != nil || offsetInt < 0 {
-			return "", fmt.Errorf("offset must be a non-negative integer")
-		}
-	}
 
-	baseURL := "https://api.search.brave.com/res/v1/web/search"
+	baseURL := "https://api.search.brave.com/res/v1/images/search"
 	queryParams := url.Values{}
 	queryParams.Add("q", params.Query)
-	queryParams.Add("count", count)
-	queryParams.Add("result_filter", resultFilter)
 
 	if params.Country != "" {
 		queryParams.Add("country", params.Country)
 	}
 	if params.SearchLang != "" {
 		queryParams.Add("search_lang", params.SearchLang)
-	}
-	if params.Offset != "" {
-		queryParams.Add("offset", params.Offset)
 	}
 
 	fullURL := fmt.Sprintf("%s?%s", baseURL, queryParams.Encode())

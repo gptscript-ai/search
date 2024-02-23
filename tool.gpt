@@ -10,7 +10,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search bing "$json_string"
+./bin/search web bing "$json_string"
 
 ---
 name: brave
@@ -25,7 +25,21 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search brave "$json_string"
+./bin/search web brave "$json_string"
+
+---
+name: brave-image
+description: I am a tool that can use the Brave Search API to return image search results.
+
+arg: q: (required) The search query to use.
+arg: country: (optional) The country code to use for the search in ISO 3166-2 format.
+arg: search_lang: (optional) The language to use for the search as a standard IETF tag. There are a few exceptions: Chinese must be either zh-hans (Simplified) or zh-hant (Traditional). Japanese must be jp. Portuguese must be either pt-pt (Portugal) or pt-br (Brazil).
+
+#!/usr/bin/env sh
+
+json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\"}"
+
+./bin/search image brave "$json_string"
 
 ---
 name: google
@@ -40,4 +54,4 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search google "$json_string"
+./bin/search web google "$json_string"

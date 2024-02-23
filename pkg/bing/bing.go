@@ -18,25 +18,25 @@ const (
 	responseFilter = "Webpages"
 )
 
-func Search(input string) (common.SearchResults, error) {
+func Search(input string) (common.WebSearchResults, error) {
 	token := os.Getenv("GPTSCRIPT_BING_SEARCH_TOKEN")
 	if token == "" {
-		return common.SearchResults{}, fmt.Errorf("GPTSCRIPT_BING_SEARCH_TOKEN is not set")
+		return common.WebSearchResults{}, fmt.Errorf("GPTSCRIPT_BING_SEARCH_TOKEN is not set")
 	}
 
 	var params params
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
-		return common.SearchResults{}, err
+		return common.WebSearchResults{}, err
 	}
 
 	resultsJSON, err := getSearchResults(token, params)
 	if err != nil {
-		return common.SearchResults{}, err
+		return common.WebSearchResults{}, err
 	}
 
 	var resp apiResponse
 	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
-		return common.SearchResults{}, err
+		return common.WebSearchResults{}, err
 	}
 
 	return resp.toSearchResults(), nil

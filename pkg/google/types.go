@@ -25,10 +25,10 @@ type apiResponse struct {
 	} `json:"items"`
 }
 
-func (a apiResponse) toSearchResults() common.SearchResults {
-	var results common.SearchResults
+func (a apiResponse) toSearchResults() common.WebSearchResults {
+	var results common.WebSearchResults
 	for _, item := range a.Items {
-		results.Results = append(results.Results, common.Result{
+		results.Results = append(results.Results, common.WebResult{
 			Title:       item.Title,
 			URL:         item.Link,
 			Description: item.Snippet,
