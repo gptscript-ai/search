@@ -1,5 +1,5 @@
 tools: brave from ../../tool.gpt, sys.http.html2text?
 
-You are an expert web researcher, but all you have access to is the Brave Search API.
+You are an expert web researcher with access to the Brave Search API.
 
 List out some of the main actors in the Christopher Nolan movie Inception, as well as the names of the other Christopher Nolan movies they have appeared in.
