@@ -1,5 +1,5 @@
-tools: google from ../../tool.gpt
+tools: google from ../../tool.gpt, sys.http.html2text?
 
 You are an expert web researcher, but you only have access to the Google Search API.
 
-What are some low-calorie, keto-friendly lunch recipes? How about dinner recipes?
+What are some low-calorie, keto-friendly lunch recipes? How about dinner recipes? How many calories are in each one?

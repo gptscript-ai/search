@@ -10,36 +10,48 @@ import (
 	"os"
 	"slices"
 	"strconv"
+
+	"github.com/gptscript-ai/search/pkg/common"
 )
 
-var (
-	// These lists come from https://api.search.brave.com/app/documentation/web-search/codes, but you must be logged in in order to view the docs.
-	braveSupportedCountries = []string{"AR", "AU", "AT", "BE", "BR", "CA", "CL", "DK", "FI", "FR", "DE", "HK", "IN", "ID", "IT", "JP", "KR", "MY", "MX", "NL", "NZ", "NO", "CN", "PL", "PT", "PH", "RU", "SA", "ZA", "ES", "SE", "CH", "TW", "TR", "GB", "US"}
-	braveSupportedLanguages = []string{"ar", "eu", "bn", "bg", "ca", "zh-hans", "zh-hant", "hr", "cs", "da", "nl", "en", "en-gb", "et", "fi", "fr", "gl", "de", "gu", "he", "hi", "hu", "is", "it", "jp", "kn", "ko", "lv", "lt", "ms", "ml", "mr", "nb", "pl", "pt-br", "pt-pt", "pa", "ro", "ru", "sr", "sk", "sl", "es", "sv", "ta", "te", "th", "tr", "uk", "vi"}
+const (
+	count        = "20" // 20 is the max allowed by Brave
+	resultFilter = "web"
 )
 
-func SearchBrave(input string) (string, error) {
+func Search(input string) (common.SearchResults, error) {
 	token := os.Getenv("GPTSCRIPT_BRAVE_SEARCH_TOKEN")
 	if token == "" {
-		return "", fmt.Errorf("GPTSCRIPT_BRAVE_SEARCH_TOKEN is not set")
+		return common.SearchResults{}, fmt.Errorf("GPTSCRIPT_BRAVE_SEARCH_TOKEN is not set")
 	}
 
-	var params struct {
-		Query      string `json:"q"`
-		Country    string `json:"country"`
-		SearchLang string `json:"search_lang"`
-		Offset     string `json:"offset"`
-	}
-
+	var params params
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
-		return "", err
+		return common.SearchResults{}, err
 	}
 
+	resultsJSON, err := getSearchResults(token, params)
+	if err != nil {
+		return common.SearchResults{}, err
+	}
+
+	var resp apiResponse
+	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
+		return common.SearchResults{}, err
+	}
+
+	return resp.toSearchResults(), nil
+}
+
+func getSearchResults(token string, params params) (string, error) {
 	// Validate parameters
-	if params.Country != "" && !slices.Contains(braveSupportedCountries, params.Country) {
+	if params.Query == "" {
+		return "", fmt.Errorf("query is required")
+	}
+	if params.Country != "" && !slices.Contains(SupportedCountries, params.Country) {
 		return "", fmt.Errorf("unsupported country: %s", params.Country)
 	}
-	if params.SearchLang != "" && !slices.Contains(braveSupportedLanguages, params.SearchLang) {
+	if params.SearchLang != "" && !slices.Contains(SupportedLanguages, params.SearchLang) {
 		return "", fmt.Errorf("unsupported language: %s", params.SearchLang)
 	}
 	if params.Offset != "" {
@@ -51,6 +63,8 @@ func SearchBrave(input string) (string, error) {
 	baseURL := "https://api.search.brave.com/res/v1/web/search"
 	queryParams := url.Values{}
 	queryParams.Add("q", params.Query)
+	queryParams.Add("count", count)
+	queryParams.Add("result_filter", resultFilter)
 
 	if params.Country != "" {
 		queryParams.Add("country", params.Country)
@@ -70,7 +84,7 @@ func SearchBrave(input string) (string, error) {
 	}
 
 	req.Header.Set("Accept-Encoding", "gzip")
-	req.Header.Set("X-Subscription-Token", os.Getenv("GPTSCRIPT_BRAVE_SEARCH_TOKEN"))
+	req.Header.Set("X-Subscription-Token", token)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {

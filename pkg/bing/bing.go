@@ -9,32 +9,42 @@ import (
 	"os"
 	"slices"
 	"strconv"
+
+	"github.com/gptscript-ai/search/pkg/common"
 )
 
-var (
-	// source: https://learn.microsoft.com/en-us/bing/search-apis/bing-web-search/reference/market-codes
-	bingSupportedCountries = []string{"AR", "AU", "AT", "BE", "BR", "CA", "CL", "DK", "FI", "FR", "DE", "HK", "IN", "ID", "IT", "JP", "KR", "MY", "MX", "NL", "NZ", "NO", "CN", "PL", "PT", "PH", "RU", "SA", "ZA", "ES", "SE", "CH", "TW", "TR", "GB", "US"}
+const (
+	count          = "20" // 50 is the max, but 20 should be sufficient
+	responseFilter = "Webpages"
 )
 
-func SearchBing(input string) (string, error) {
+func Search(input string) (common.SearchResults, error) {
 	token := os.Getenv("GPTSCRIPT_BING_SEARCH_TOKEN")
 	if token == "" {
-		return "", fmt.Errorf("GPTSCRIPT_BING_SEARCH_TOKEN is not set")
+		return common.SearchResults{}, fmt.Errorf("GPTSCRIPT_BING_SEARCH_TOKEN is not set")
 	}
 
-	var params struct {
-		Query      string `json:"q"`
-		Country    string `json:"country"`
-		SearchLang string `json:"search_lang"`
-		Offset     string `json:"offset"`
-	}
-
+	var params params
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
-		return "", err
+		return common.SearchResults{}, err
 	}
 
+	resultsJSON, err := getSearchResults(token, params)
+	if err != nil {
+		return common.SearchResults{}, err
+	}
+
+	var resp apiResponse
+	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
+		return common.SearchResults{}, err
+	}
+
+	return resp.toSearchResults(), nil
+}
+
+func getSearchResults(token string, params params) (string, error) {
 	// Validate parameters
-	if params.Country != "" && !slices.Contains(bingSupportedCountries, params.Country) {
+	if params.Country != "" && !slices.Contains(SupportedCountries, params.Country) {
 		return "", fmt.Errorf("unsupported country: %s", params.Country)
 	}
 	if params.Offset != "" {
@@ -46,6 +56,8 @@ func SearchBing(input string) (string, error) {
 	baseURL := "https://api.bing.microsoft.com/v7.0/search"
 	queryParams := url.Values{}
 	queryParams.Add("q", params.Query)
+	queryParams.Add("count", count)
+	queryParams.Add("responseFilter", responseFilter)
 
 	if params.Country != "" {
 		queryParams.Add("cc", params.Country)

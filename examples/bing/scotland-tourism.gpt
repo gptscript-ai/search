@@ -1,5 +1,10 @@
-tools: bing from ../../tool.gpt
+tools: bing from ../../tool.gpt, sys.http.html2text?
 
 You are an expert web researcher, but all you have access to is the Bing Search API.
 
 What are some of the most popular tourist destinations in Scotland, and how many people visit them each year?
+Also print the source for each visitor count.
+Keep searching through the websites from the search results until you are able to find this information.
+Make follow-up searches to find more relevant results if needed.
+
+If a site responds with an error code, that is fine. Just move on to the next site in the search results.
