@@ -13,8 +13,6 @@ import (
 	"github.com/gptscript-ai/search/pkg/common"
 )
 
-const count = "10" // 10 is the max allowed by Google
-
 func Search(input string) (common.WebSearchResults, error) {
 	token := os.Getenv("GPTSCRIPT_GOOGLE_SEARCH_TOKEN")
 	if token == "" {
@@ -26,7 +24,7 @@ func Search(input string) (common.WebSearchResults, error) {
 		return common.WebSearchResults{}, fmt.Errorf("GPTSCRIPT_GOOGLE_SEARCH_ENGINE_ID is not set")
 	}
 
-	var params params
+	var params webParams
 	if err := json.Unmarshal([]byte(input), &params); err != nil {
 		return common.WebSearchResults{}, err
 	}
@@ -36,7 +34,7 @@ func Search(input string) (common.WebSearchResults, error) {
 		return common.WebSearchResults{}, err
 	}
 
-	var resp apiResponse
+	var resp webAPIResponse
 	if err := json.Unmarshal([]byte(resultsJSON), &resp); err != nil {
 		return common.WebSearchResults{}, err
 	}
@@ -44,7 +42,7 @@ func Search(input string) (common.WebSearchResults, error) {
 	return resp.toSearchResults(), nil
 }
 
-func getSearchResults(token, engineID string, params params) (string, error) {
+func getSearchResults(token, engineID string, params webParams) (string, error) {
 	if params.Query == "" {
 		return "", fmt.Errorf("query is empty")
 	}

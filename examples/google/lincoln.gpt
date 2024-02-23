@@ -1,0 +1,8 @@
+tools: google-image from ../../tool.gpt, sys.exec?
+
+Find an image of the Lincoln Memorial. Select an image at random from the search results and download it to the local filesystem using the `wget` command.
+If an image download fails, try the next image from the results.
+
+Rename the downloaded file so that it has the proper extension (for example, .jpg).
+
+You have access to the ffmpeg command. Use it to resize the image to 512 pixels vertically and maintain the aspect ratio.

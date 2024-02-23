@@ -72,6 +72,8 @@ func image(engine, input string) {
 	switch engine {
 	case EngineBrave:
 		results, err = brave.SearchImage(input)
+	case EngineGoogle:
+		results, err = google.SearchImage(input)
 	default:
 		logrus.Errorf("Unsupported search engine for image search: %s", engine)
 		os.Exit(1)
