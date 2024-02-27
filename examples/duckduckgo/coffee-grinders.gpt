@@ -1,0 +1,4 @@
+tools: duckduckgo from ../../tool.gpt, sys.http.html2text?
+
+Which coffee grinders are the best for pour over coffee? Search using DuckDuckGo. Feel free to get the contents
+of the returned URLs in order to get more information. Provide as much detail as you can.

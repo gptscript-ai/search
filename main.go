@@ -7,6 +7,7 @@ import (
 	"github.com/gptscript-ai/search/pkg/bing"
 	"github.com/gptscript-ai/search/pkg/brave"
 	"github.com/gptscript-ai/search/pkg/common"
+	"github.com/gptscript-ai/search/pkg/duckduckgo"
 	"github.com/gptscript-ai/search/pkg/google"
 	"github.com/sirupsen/logrus"
 )
@@ -17,6 +18,7 @@ const (
 
 	EngineBing   = "bing"
 	EngineBrave  = "brave"
+	EngineDDG    = "duckduckgo"
 	EngineGoogle = "google"
 )
 
@@ -49,6 +51,8 @@ func web(engine, input string) {
 		results, err = bing.Search(input)
 	case EngineBrave:
 		results, err = brave.Search(input)
+	case EngineDDG:
+		results, err = duckduckgo.Search(input)
 	case EngineGoogle:
 		results, err = google.Search(input)
 	default:

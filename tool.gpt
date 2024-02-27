@@ -42,6 +42,18 @@ json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_la
 ./bin/search image brave "$json_string"
 
 ---
+name: duckduckgo
+description: I am a tool that can use DuckDuckGo to return web search results.
+
+arg: q: (required) The search query to use.
+
+#!/usr/bin/env sh
+
+json_string="{\"q\":\"$q\"}"
+
+./bin/search web duckduckgo "$json_string"
+
+---
 name: google
 description: I am a tool that can use the Google Custom Search JSON API to return web search results.
 

@@ -1,6 +1,6 @@
 # Search Tools for GPTScript
 
-This repo contains search tools for GPTScript. We currently support Bing (web only), Brave (web and image), and Google (web and image).
+This repo contains search tools for GPTScript. We currently support Bing (web only), Brave (web and image), DuckDuckGo (web only), and Google (web and image).
 
 Web search output is in the following format:
 
@@ -37,6 +37,12 @@ The environment variable `GPTSCRIPT_BING_SEARCH_TOKEN` must be set to your API k
 The `brave` and `brave-image` tools return search results from the [Brave Search API](https://brave.com/search/api/).
 
 The environment variable `GPTSCRIPT_BRAVE_SEARCH_TOKEN` must be set to your API key in order for it to work.
+
+### DuckDuckGo
+
+The `duckduckgo` tool returns search results from the [DuckDuckGo HTML-only Site](https://html.duckduckgo.com).
+
+No API key is required to use this tool.
 
 ### Google
 
