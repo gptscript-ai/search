@@ -28,7 +28,7 @@ All tools are currently implemented in the tool.gpt file.
 
 ### Bing
 
-The `bing` tool returns search results from the [Bing Web Search API](https://www.microsoft.com/en-us/bing/apis/bing-web-search-api).
+The `bing` and `bing-image` tools return search results from the [Bing Web Search API](https://www.microsoft.com/en-us/bing/apis/bing-web-search-api).
 
 The environment variable `GPTSCRIPT_BING_SEARCH_TOKEN` must be set to your API key in order for it to work.
 

@@ -44,14 +44,12 @@ func (r webAPIResponse) toSearchResults() common.WebSearchResults {
 }
 
 type imageParams struct {
-	Query              string `json:"q"`
-	Country            string `json:"country"`
-	SearchLang         string `json:"search_lang"`
-	Offset             string `json:"offset"`
-	ImageSize          string `json:"imgSize"`
-	ImageType          string `json:"imgType"`
-	ImageDominantColor string `json:"imgDominantColor"`
-	ImageColorType     string `json:"imgColorType"`
+	Query      string `json:"q"`
+	Country    string `json:"country"`
+	SearchLang string `json:"search_lang"`
+	Offset     string `json:"offset"`
+	ImageSize  string `json:"imgSize"`
+	ImageType  string `json:"imgType"`
 }
 
 type imageAPIResponse struct {

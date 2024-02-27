@@ -74,6 +74,8 @@ func image(engine, input string) {
 		err     error
 	)
 	switch engine {
+	case EngineBing:
+		results, err = bing.SearchImage(input)
 	case EngineBrave:
 		results, err = brave.SearchImage(input)
 	case EngineGoogle:

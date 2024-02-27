@@ -1,0 +1,8 @@
+tools: bing-image from ../../tool.gpt, sys.exec?
+
+Find an image of a mountain landscape. Download it to the local filesystem using the `wget` command.
+If an image download fails, try the next image from the results.
+
+Rename the downloaded file so that it has the proper extension (for example, .jpg).
+
+You have access to the ffmpeg command. Distort the image using it.

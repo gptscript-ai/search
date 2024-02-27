@@ -13,6 +13,21 @@ json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_la
 ./bin/search web bing "$json_string"
 
 ---
+name: bing-image
+description: I am a tool that can use the Bing Search API to return image search results.
+
+arg: q: (required) The search query to use.
+arg: country: (optional) The country to use for the search in ISO 3166-2 format.
+arg: search_lang: (optional) An RFC 5646 language code to use for the search. This will be used in the Accept-Language header.
+arg: offset: (optional) The offset to use for the search results (used for pagination).
+
+#!/usr/bin/env sh
+
+json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
+
+./bin/search image bing "$json_string"
+
+---
 name: brave
 description: I am a tool that can use the Brave Search API to return web search results.
 
@@ -78,8 +93,6 @@ arg: search_lang: (optional) The language to use for the search as a standard IE
 arg: offset: (optional) The offset to use for the search results (used for pagination).
 arg: img_size: (optional) The size of the image to search for. Supported values: "huge", "icon", "large", "medium", "small", "xlarge", "xxlarge".
 arg: img_type: (optional) The type of image to search for. Supported values: "clipart", "face", "lineart", "stock", "photo", "animated".
-arg: img_dominant_color: (optional) The dominant color of the image to search for. Supported values: "black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "teal", "white", "yellow".
-arg: img_color_type: (optional) The color type of the image to search for. Supported values: "color", "gray", "mono" (black and white), "trans" (transparent background).
 
 #!/usr/bin/env sh
 

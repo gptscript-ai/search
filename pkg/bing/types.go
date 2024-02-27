@@ -33,3 +33,30 @@ func (a apiResponse) toSearchResults() common.WebSearchResults {
 	}
 	return results
 }
+
+type imageParams struct {
+	Query      string `json:"q"`
+	Country    string `json:"country"`
+	SearchLang string `json:"search_lang"`
+	Offset     string `json:"offset"`
+}
+
+type imageAPIResponse struct {
+	Value []struct {
+		Name        string `json:"name"`
+		ContentURL  string `json:"contentUrl"`
+		HostPageURL string `json:"hostPageUrl"`
+	} `json:"value"`
+}
+
+func (a imageAPIResponse) toSearchResults() common.ImageSearchResults {
+	var results common.ImageSearchResults
+	for _, v := range a.Value {
+		results.Results = append(results.Results, common.ImageResult{
+			Title:    v.Name,
+			ImageURL: v.ContentURL,
+			Source:   v.HostPageURL,
+		})
+	}
+	return results
+}

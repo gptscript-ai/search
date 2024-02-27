@@ -63,12 +63,6 @@ func getImageSearchResults(token, engineID string, params imageParams) (string, 
 	if params.ImageType != "" && !slices.Contains(SupportedImageTypes, params.ImageType) {
 		return "", fmt.Errorf("unsupported image type: %s", params.ImageType)
 	}
-	if params.ImageDominantColor != "" && !slices.Contains(SupportedImageDominantColors, params.ImageDominantColor) {
-		return "", fmt.Errorf("unsupported image dominant color: %s", params.ImageDominantColor)
-	}
-	if params.ImageColorType != "" && !slices.Contains(SupportedImageColorTypes, params.ImageColorType) {
-		return "", fmt.Errorf("unsupported image color type: %s", params.ImageColorType)
-	}
 
 	baseURL := "https://www.googleapis.com/customsearch/v1"
 	queryParams := url.Values{}
@@ -92,12 +86,6 @@ func getImageSearchResults(token, engineID string, params imageParams) (string, 
 	}
 	if params.ImageType != "" {
 		queryParams.Set("imgType", params.ImageType)
-	}
-	if params.ImageDominantColor != "" {
-		queryParams.Set("imgDominantColor", params.ImageDominantColor)
-	}
-	if params.ImageColorType != "" {
-		queryParams.Set("imgColorType", params.ImageColorType)
 	}
 
 	fullURL := fmt.Sprintf("%s?%s", baseURL, queryParams.Encode())
