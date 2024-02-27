@@ -1,6 +1,6 @@
 # Search Tools for GPTScript
 
-This repo contains search tools for GPTScript. We currently support Bing (web only), Brave (web and image), DuckDuckGo (web only), and Google (web and image).
+This repo contains search tools for GPTScript. We currently support Bing (web and image), Brave (web and image), DuckDuckGo (web only), and Google (web and image).
 
 Web search output is in the following format:
 
