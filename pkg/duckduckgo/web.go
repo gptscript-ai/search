@@ -134,8 +134,13 @@ func getSearchResultsNoChrome(params webParams) (common.WebSearchResults, error)
 
 	req.Header.Add("Accept", "text/html")
 	req.Header.Add("Accept-Encoding", "gzip, deflate")
-	req.Header.Add("Accept-Language", "en-US,en;q=0.9")
 	req.Header.Add("Cache-Control", "no-cache")
+
+	if params.SearchLang != "" {
+		req.Header.Add("Accept-Language", params.SearchLang)
+	} else {
+		req.Header.Add("Accept-Language", "en-US,en;q=0.9")
+	}
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
