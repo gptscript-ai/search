@@ -44,7 +44,8 @@ The `duckduckgo` tool returns search results from the [DuckDuckGo HTML-only Site
 
 No API key is required to use this tool.
 
-Google Chrome must be installed, because this tool uses it in headless mode in the background, via the [chromedp](https://github.com/chromedp/chromedp) library.
+By default, this tool will make an HTTP request to DuckDuckGo and parse the results. If you do this enough times, it will start to get rate limited.
+Rate limits can be more easily avoided by using Google Chrome in headless mode. The tool will do this if the `GPTSCRIPT_USE_CHROME` environment variable is set to `true`.
 
 ### Google
 
