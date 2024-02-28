@@ -44,6 +44,8 @@ The `duckduckgo` tool returns search results from the [DuckDuckGo HTML-only Site
 
 No API key is required to use this tool.
 
+Google Chrome must be installed, because this tool uses it in headless mode in the background, via the [chromedp](https://github.com/chromedp/chromedp) library.
+
 ### Google
 
 The `google` and `google-image` tools return search results from the [Google Custom Search JSON API](https://developers.google.com/custom-search/v1/overview).
