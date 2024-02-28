@@ -32,7 +32,8 @@ func getSearchResults(params webParams) (common.WebSearchResults, error) {
 	fullURL := fmt.Sprintf("%s?%s", baseURL, queryParams.Encode())
 
 	var nodes []*cdp.Node
-	ctx, _ := chromedp.NewContext(context.Background())
+	ctx, stop := chromedp.NewContext(context.Background())
+	defer stop()
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(fullURL),
 		chromedp.Nodes(".result__body", &nodes, chromedp.NodeVisible, chromedp.Populate(-1, true)))
