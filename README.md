@@ -22,6 +22,19 @@ For usage examples with GPTScript, see the `examples` directory.
 
 > **You are responsible for ensuring that your use of these search APIs with GPTScript does not violate the terms of service of the respective search engines.**
 
+## Usage
+
+```bash
+# Build the binary
+make build
+
+# Set up the environment
+export OPENAI_API_KEY=your-api-key
+
+# Run one of the examples
+gptscript --cache=false ./examples/duckduckgo/coffee-grinders.gpt
+```
+
 ## Tools
 
 All tools are currently implemented in the tool.gpt file.
