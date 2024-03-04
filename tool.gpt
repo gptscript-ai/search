@@ -10,7 +10,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search web bing "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search web bing "$json_string"
 
 ---
 name: bing-image
@@ -25,7 +25,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search image bing "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search image bing "$json_string"
 
 ---
 name: brave
@@ -40,7 +40,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search web brave "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search web brave "$json_string"
 
 ---
 name: brave-image
@@ -54,7 +54,7 @@ arg: search_lang: (optional) The language to use for the search as a standard IE
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\"}"
 
-./bin/search image brave "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search image brave "$json_string"
 
 ---
 name: duckduckgo
@@ -67,7 +67,7 @@ arg: search_lang: (optional) The language to use for the search. Format accordin
 
 json_string="{\"q\":\"$q\",\"search_lang\":\"$search_lang\"}"
 
-./bin/search web duckduckgo "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search web duckduckgo "$json_string"
 
 ---
 name: google
@@ -82,7 +82,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\"}"
 
-./bin/search web google "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search web google "$json_string"
 
 ---
 name: google-image
@@ -99,4 +99,4 @@ arg: img_type: (optional) The type of image to search for. Supported values: "cl
 
 json_string="{\"q\":\"$q\",\"country\":\"$country\",\"search_lang\":\"$search_lang\",\"offset\":\"$offset\",\"imgSize\":\"$img_size\",\"imgType\":\"$img_type\",\"imgDominantColor\":\"$img_dominant_color\",\"imgColorType\":\"$img_color_type\"}"
 
-./bin/search image google "$json_string"
+${GPTSCRIPT_TOOL_DIR}/bin/search image google "$json_string"
