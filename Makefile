@@ -1,5 +1,5 @@
 build:
-	CGO_ENABLED=0 go build -o bin/search -tags "${GO_TAGS}" -ldflags "-s -w" .
+	CGO_ENABLED=0 go build -o bin/gptscript-go-tool -tags "${GO_TAGS}" -ldflags "-s -w" .
 
 tidy:
 	go mod tidy
