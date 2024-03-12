@@ -1,5 +1,5 @@
 name: bing
-description: I am a tool that can use the Bing Search API to return web search results.
+description: Uses the Bing Search API to return web search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country to use for the search in ISO 3166-2 format.
@@ -10,7 +10,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 ---
 name: bing-image
-description: I am a tool that can use the Bing Search API to return image search results.
+description: Uses the Bing Search API to return image search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country to use for the search in ISO 3166-2 format.
@@ -21,7 +21,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 ---
 name: brave
-description: I am a tool that can use the Brave Search API to return web search results.
+description: Uses the Brave Search API to return web search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country code to use for the search in ISO 3166-2 format.
@@ -32,7 +32,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 ---
 name: brave-image
-description: I am a tool that can use the Brave Search API to return image search results.
+description: Uses the Brave Search API to return image search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country code to use for the search in ISO 3166-2 format.
@@ -42,7 +42,7 @@ arg: search_lang: (optional) The language to use for the search as a standard IE
 
 ---
 name: duckduckgo
-description: I am a tool that can use DuckDuckGo to return web search results.
+description: Uses DuckDuckGo to return web search results.
 
 arg: q: (required) The search query to use.
 arg: search_lang: (optional) The language to use for the search. Format according to normal standards for the Accept-Language HTTP header. Defaults to en-US.
@@ -51,7 +51,7 @@ arg: search_lang: (optional) The language to use for the search. Format accordin
 
 ---
 name: google
-description: I am a tool that can use the Google Custom Search JSON API to return web search results.
+description: Uses the Google Custom Search JSON API to return web search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country code to use for the search. Supported countries: "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CY", "CZ", "DK", "DJ", "DM", "DO", "TP", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "EU", "FK", "FO", "FJ", "FI", "FR", "FX", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "SH", "KN", "LC", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "CS", "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "GS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "UK", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "YU", "ZM", "ZW"
@@ -62,7 +62,7 @@ arg: offset: (optional) The offset to use for the search results (used for pagin
 
 ---
 name: google-image
-description: I am a tool that can use the Google Custom Search JSON API to return image search results.
+description: Uses the Google Custom Search JSON API to return image search results.
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country code to use for the search.  Supported countries: "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CY", "CZ", "DK", "DJ", "DM", "DO", "TP", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "EU", "FK", "FO", "FJ", "FI", "FR", "FX", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "SH", "KN", "LC", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "CS", "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "GS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "UK", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "YU", "ZM", "ZW"
