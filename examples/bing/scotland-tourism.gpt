@@ -1,4 +1,4 @@
-tools: bing from ../../tool.gpt, sys.http.html2text?
+tools: github.com/gptscript-ai/search/bing, sys.http.html2text?
 
 You are an expert web researcher with access to the Bing Search API.
 

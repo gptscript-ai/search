@@ -1,0 +1,8 @@
+description: Uses the Bing Search API to return web search results.
+
+arg: q: (required) The search query to use.
+arg: country: (optional) The country to use for the search in ISO 3166-2 format.
+arg: search_lang: (optional) An RFC 5646 language code to use for the search. This will be used in the Accept-Language header.
+arg: offset: (optional) The offset to use for the search results (used for pagination).
+
+#!${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool "${GPTSCRIPT_INPUT}"

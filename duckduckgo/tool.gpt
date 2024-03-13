@@ -1,0 +1,6 @@
+description: Uses DuckDuckGo to return web search results.
+
+arg: q: (required) The search query to use.
+arg: search_lang: (optional) The language to use for the search. Format according to normal standards for the Accept-Language HTTP header. Defaults to en-US.
+
+#!${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool "${GPTSCRIPT_INPUT}"

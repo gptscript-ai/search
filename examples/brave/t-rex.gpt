@@ -1,4 +1,4 @@
-tools: brave-image from ../../tool.gpt, sys.exec?, sys.read, sys.write
+tools: github.com/gptscript-ai/search/brave-image, sys.exec?, sys.read, sys.write
 
 Find an image of a T-Rex. Select an image at random from the search results and download it to the local filesystem using the `wget` command.
 If an image download fails, try the next image from the results.

@@ -1,4 +1,4 @@
-tools: bing-image from ../../tool.gpt, sys.exec?
+tools: github.com/gptscript-ai/search/bing-image, sys.exec?
 
 Find an image of a mountain landscape. Download it to the local filesystem using the `wget` command.
 If an image download fails, try the next image from the results.

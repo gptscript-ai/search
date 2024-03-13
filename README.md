@@ -24,20 +24,15 @@ For usage examples with GPTScript, see the `examples` directory.
 
 ## Usage
 
+Each of the search tools live in their own subdirectory. They can be referenced like `github.com/gptscript-ai/search/<tool>`.
+For example, `github.com/gptscript-ai/search/duckduckgo` references the DuckDuckGo tool.
+The options are `bing`, `bing-image`, `brave`, `brave-image`, `duckduckgo`, `google`, and `google-image`.
+
 ```bash
-# Build the binary
-make build
-
-# Set up the environment
-export OPENAI_API_KEY=your-api-key
-
-# Run one of the examples
-gptscript --cache=false ./examples/duckduckgo/coffee-grinders.gpt
+gptscript --cache=false github.com/gptscript-ai/search/duckduckgo '{"q":"best AI models for function calling"}'
 ```
 
-## Tools
-
-All tools are currently implemented in the tool.gpt file.
+Specific details and instructions for each search engine follow.
 
 ### Bing
 

@@ -1,4 +1,4 @@
-tools: google-image from ../../tool.gpt, sys.exec?
+tools: github.com/gptscript-ai/search/google-image, sys.exec?
 
 Find an image of the Lincoln Memorial. Select an image at random from the search results and download it to the local filesystem using the `wget` command.
 If an image download fails, try the next image from the results.

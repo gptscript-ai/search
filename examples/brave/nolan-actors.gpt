@@ -1,4 +1,4 @@
-tools: brave from ../../tool.gpt, sys.http.html2text?
+tools: github.com/gptscript-ai/search/brave, sys.http.html2text?
 
 You are an expert web researcher with access to the Brave Search API.
 

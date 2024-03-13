@@ -1,4 +1,4 @@
-tools: google from ../../tool.gpt, sys.http.html2text?
+tools: github.com/gptscript-ai/search/google, sys.http.html2text?
 
 You are an expert web researcher with access to the Google Search API.
 
