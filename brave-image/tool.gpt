@@ -1,5 +1,4 @@
 description: Uses the Brave Search API to return image search results.
-credential: github.com/gptscript-ai/search/brave-credential
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country code to use for the search in ISO 3166-2 format.
