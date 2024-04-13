@@ -38,13 +38,13 @@ Specific details and instructions for each search engine follow.
 
 The `bing` and `bing-image` tools return search results from the [Bing Web Search API](https://www.microsoft.com/en-us/bing/apis/bing-web-search-api).
 
-The environment variable `GPTSCRIPT_BING_SEARCH_TOKEN` must be set to your API key in order for it to work.
+The credential tool will ask for your API token.
 
 ### Brave
 
 The `brave` and `brave-image` tools return search results from the [Brave Search API](https://brave.com/search/api/).
 
-The environment variable `GPTSCRIPT_BRAVE_SEARCH_TOKEN` must be set to your API key in order for it to work.
+The credential tool will ask for your API token.
 
 ### DuckDuckGo
 
@@ -59,4 +59,4 @@ Rate limits can be more easily avoided by using Google Chrome in headless mode. 
 
 The `google` and `google-image` tools return search results from the [Google Custom Search JSON API](https://developers.google.com/custom-search/v1/overview).
 
-The environment variable `GPTSCRIPT_GOOGLE_SEARCH_TOKEN` must be set to your API key, and `GPTSCRIPT_GOOGLE_SEARCH_ENGINE_ID` must be set to your search engine ID in order for it to work.
+The credential tool will ask for your search engine ID and your API token.
