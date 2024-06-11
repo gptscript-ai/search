@@ -1,5 +1,5 @@
 description: Uses the Bing Search API to return web search results.
-credential: github.com/gptscript-ai/search/bing-credential
+credential: github.com/gptscript-ai/credential as bingSearchAPIKey with GPTSCRIPT_BING_SEARCH_TOKEN as env and "Please enter your Bing Search API key" as message and key as field
 
 arg: q: (required) The search query to use.
 arg: country: (optional) The country to use for the search in ISO 3166-2 format.
